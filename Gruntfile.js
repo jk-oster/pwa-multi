@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     // const mozjpeg = require('imagemin-mozjpeg');
 
@@ -11,9 +11,23 @@ module.exports = function(grunt) {
         },
         terser: {
             dist: {
-                files: {
-                    'app/js/pwa.min.js': ['app/js/pwa.js'],
+                options: {
+                    compress: true,
+                    safari10: true,
+                    ecma: 2018,
+                    sourceMap: {
+                        includeSources: true,
+                    },
                 },
+                files: [
+                    {
+                        expand: true,
+                        src: ['*.js', '!*.min.js'],
+                        dest: './app',
+                        cwd: './src',
+                        ext: '.min.js',
+                    },
+                ],
             },
         },
         watch: {
@@ -26,7 +40,21 @@ module.exports = function(grunt) {
             },
             js: {
                 files: 'src/js/*.js',
-                tasks: ['concat', 'terser'],
+                tasks: ['terser'],
+                options: {
+                    livereload: true,
+                },
+            },
+            views : {
+                files: 'src/views/*.js',
+                tasks: ['terser'],
+                options: {
+                    livereload: true,
+                },
+            },
+            templates : {
+                files: 'src/templates/*.tpl',
+                tasks: ['copy'],
                 options: {
                     livereload: true,
                 },
@@ -73,6 +101,14 @@ module.exports = function(grunt) {
                 }]
             }
         },
+        copy: {
+            main: {
+                files: [
+                    // includes files within path
+                    {expand: true, src: ['src/templates'], dest: 'app/templates', filter: 'isFile'},
+                ]
+            }
+        },
         autoprefixer: {
             options: {
                 browsers: [
@@ -85,22 +121,22 @@ module.exports = function(grunt) {
                 ],
                 diff: true,
             },
-            dist:{
-                files:{
-                    'app/css/main.css':'app/css/main.css'
+            dist: {
+                files: {
+                    'app/css/main.css': 'app/css/main.css'
                 },
             },
         },
     });
-
-    // grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-uglify-es');
     grunt.loadNpmTasks('grunt-terser');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-uncss');
     grunt.loadNpmTasks('grunt-autoprefixer');
-    grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'concat', 'terser']);
+    grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'copy', 'terser']);
 };
