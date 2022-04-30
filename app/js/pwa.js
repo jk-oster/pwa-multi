@@ -1,24 +1,15 @@
 "use strict";
-console.log('hello world');
+import KWMJS from "./kwm.js";
+
+console.log('hello world pwa loaded');
+
+new KWMJS();
+
+console.log(window.kwm);
 
 const answer = await Notification.requestPermission();
-console.log(answer);
 
-// Check if serviceworker is supported
-if ('serviceWorker' in navigator) {
-    try {
-        // register Serviceworker
-        await navigator.serviceWorker.register('./serviceworker.js');
-        console.log("serviceWorker registered");
-    } catch (error) {
-        console.log("serviceWorker registration failed", error);
-    }
-} else console.log('serviceWorker is not supported');
-
-const requestOptions = {
-    method: 'GET',
-    redirect: 'follow'
-};
+/*
 
 btn_fetch_cloths.addEventListener('click', (e) => {
     e.preventDefault();
@@ -30,7 +21,6 @@ btn_fetch_cloths.addEventListener('click', (e) => {
         .then(posts => renderPosts(posts));
     btn_fetch_cloths.style.display = 'none';
 });
-
 
 function paginate(totalPages) {
     if (totalPages > 1) {
@@ -68,66 +58,6 @@ function setFrom(color) {
     login_state.classList.add(color);
 }
 
-// Hab ich schon einen Token
-if (window.localStorage.getItem('token')) {
-    setFrom('green');
-    user_display_name.innerHTML = 'Willkommen zurück, ' + window.localStorage.getItem('user_display_name');
-    console.log(`Fetch token`);
-    submit_post_form.classList.remove("hidden");
-
-} else {
-    btn_login.addEventListener('click', (e) => {
-        e.preventDefault(); // Prevent "Submit Action"
-        submit_post_form.classList.add("hidden");
-
-        const credentials = {
-            username: username.value,
-            password: password.value,
-        };
-
-        fetch("https://api.s2010456022.student.kwmhgb.at/wp-json/jwt-auth/v1/token", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(credentials),
-        })
-            .then(response => {
-                if (response.status !== 200) {
-                    alert('Fehlgeschlagen: ' + response.status)
-                    console.error(response);
-                    setFrom('red');
-                    user_display_name.innerHTML = '';
-                }
-                return response;
-            })
-            .then(response => response.json())
-            .then(response => {
-                console.log(response);
-                window.localStorage.setItem('token', response.token);
-                window.localStorage.setItem('user_display_name', response.user_display_name);
-
-                submit_post_form.classList.remove("hidden");
-                setFrom('green');
-                user_display_name.innerHTML = 'Willkommen zurück, ' + window.localStorage.getItem('user_display_name');
-
-            })
-            .catch(error => console.log('Error: ', error));
-    });
-}
-
-btn_logout.addEventListener('click', (e) => {
-    e.preventDefault(); // Prevent "Submit Action"
-    window.localStorage.removeItem('token');
-    window.localStorage.removeItem('user_display_name');
-
-    setFrom('red');
-    user_display_name.innerHTML = '';
-    submit_post_form.classList.add("hidden");
-
-
-});
-
 submit_post.addEventListener('click', event => {
     event.preventDefault(); // Prevent "Submit Action"
     console.log('Submit clicked');
@@ -158,4 +88,4 @@ submit_post.addEventListener('click', event => {
         .then(response => {
             renderPosts([response.json()]);
         });
-});
+});*/
