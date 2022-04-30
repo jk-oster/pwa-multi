@@ -1,0 +1,80 @@
+{
+  "id": 98,
+  "date": "2022-04-29T18:18:36",
+  "date_gmt": "2022-04-29T18:18:36",
+  "guid": {
+    "rendered": "https://api.s2010456022.student.kwmhgb.at/?post_type=group&#038;p=98"
+  },
+  "modified": "2022-04-29T18:18:36",
+  "modified_gmt": "2022-04-29T18:18:36",
+  "slug": "testschoolgroup2",
+  "status": "publish",
+  "type": "group",
+  "link": "https://api.s2010456022.student.kwmhgb.at/group/testschoolgroup2/",
+  "title": {
+    "rendered": "TestSchoolGroup2"
+  },
+  "content": {
+    "rendered": "",
+    "protected": false
+  },
+  "template": "",
+  "meta": [],
+  "categories": [],
+  "tags": [],
+  "acf": {
+    "name": "TestSchoolGroup2",
+    "course": [
+      86
+    ],
+    "country": "COL",
+    "school": "Test School Colombia",
+    "admin": false,
+    "users": [
+      4,
+      5
+    ],
+    "matched_group": ""
+  },
+  "_links": {
+    "self": [
+      {
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/group/98"
+      }
+    ],
+    "collection": [
+      {
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/group"
+      }
+    ],
+    "about": [
+      {
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/types/group"
+      }
+    ],
+    "wp:attachment": [
+      {
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/media?parent=98"
+      }
+    ],
+    "wp:term": [
+      {
+        "taxonomy": "category",
+        "embeddable": true,
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/categories?post=98"
+      },
+      {
+        "taxonomy": "post_tag",
+        "embeddable": true,
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/tags?post=98"
+      }
+    ],
+    "curies": [
+      {
+        "name": "wp",
+        "href": "https://api.w.org/{rel}",
+        "templated": true
+      }
+    ]
+  }
+}

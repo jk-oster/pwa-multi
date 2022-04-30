@@ -1,0 +1,105 @@
+{
+  "id": 119,
+  "date": "2022-04-29T23:24:10",
+  "date_gmt": "2022-04-29T23:24:10",
+  "guid": {
+    "rendered": "https://api.s2010456022.student.kwmhgb.at/wp-content/uploads/2022/04/3669431_new_fiber_ic_icon.png"
+  },
+  "modified": "2022-04-29T23:24:10",
+  "modified_gmt": "2022-04-29T23:24:10",
+  "slug": "3669431_new_fiber_ic_icon",
+  "status": "inherit",
+  "type": "attachment",
+  "link": "https://api.s2010456022.student.kwmhgb.at/3669431_new_fiber_ic_icon/",
+  "title": {
+    "rendered": "3669431_new_fiber_ic_icon"
+  },
+  "author": 4,
+  "comment_status": "open",
+  "ping_status": "closed",
+  "template": "",
+  "meta": [],
+  "acf": [],
+  "description": {
+    "rendered": "<p class=\"attachment\"><a href='https://api.s2010456022.student.kwmhgb.at/wp-content/uploads/2022/04/3669431_new_fiber_ic_icon.png'><img width=\"300\" height=\"300\" src=\"https://api.s2010456022.student.kwmhgb.at/wp-content/uploads/2022/04/3669431_new_fiber_ic_icon-300x300.png\" class=\"attachment-medium size-medium\" alt=\"\" loading=\"lazy\" srcset=\"https://api.s2010456022.student.kwmhgb.at/wp-content/uploads/2022/04/3669431_new_fiber_ic_icon-300x300.png 300w, https://api.s2010456022.student.kwmhgb.at/wp-content/uploads/2022/04/3669431_new_fiber_ic_icon-150x150.png 150w, https://api.s2010456022.student.kwmhgb.at/wp-content/uploads/2022/04/3669431_new_fiber_ic_icon.png 512w\" sizes=\"(max-width: 300px) 100vw, 300px\" /></a></p>\n"
+  },
+  "caption": {
+    "rendered": ""
+  },
+  "alt_text": "",
+  "media_type": "image",
+  "mime_type": "image/png",
+  "media_details": {
+    "width": 512,
+    "height": 512,
+    "file": "2022/04/3669431_new_fiber_ic_icon.png",
+    "sizes": {
+      "medium": {
+        "file": "3669431_new_fiber_ic_icon-300x300.png",
+        "width": 300,
+        "height": 300,
+        "mime_type": "image/png",
+        "source_url": "https://api.s2010456022.student.kwmhgb.at/wp-content/uploads/2022/04/3669431_new_fiber_ic_icon-300x300.png"
+      },
+      "thumbnail": {
+        "file": "3669431_new_fiber_ic_icon-150x150.png",
+        "width": 150,
+        "height": 150,
+        "mime_type": "image/png",
+        "source_url": "https://api.s2010456022.student.kwmhgb.at/wp-content/uploads/2022/04/3669431_new_fiber_ic_icon-150x150.png"
+      },
+      "full": {
+        "file": "3669431_new_fiber_ic_icon.png",
+        "width": 512,
+        "height": 512,
+        "mime_type": "image/png",
+        "source_url": "https://api.s2010456022.student.kwmhgb.at/wp-content/uploads/2022/04/3669431_new_fiber_ic_icon.png"
+      }
+    },
+    "image_meta": {
+      "aperture": "0",
+      "credit": "",
+      "camera": "",
+      "caption": "",
+      "created_timestamp": "0",
+      "copyright": "",
+      "focal_length": "0",
+      "iso": "0",
+      "shutter_speed": "0",
+      "title": "",
+      "orientation": "0",
+      "keywords": []
+    }
+  },
+  "post": null,
+  "source_url": "https://api.s2010456022.student.kwmhgb.at/wp-content/uploads/2022/04/3669431_new_fiber_ic_icon.png",
+  "_links": {
+    "self": [
+      {
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/media/119"
+      }
+    ],
+    "collection": [
+      {
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/media"
+      }
+    ],
+    "about": [
+      {
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/types/attachment"
+      }
+    ],
+    "author": [
+      {
+        "embeddable": true,
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/users/4"
+      }
+    ],
+    "replies": [
+      {
+        "embeddable": true,
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/comments?post=119"
+      }
+    ]
+  }
+}

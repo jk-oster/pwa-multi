@@ -1,0 +1,31 @@
+{
+  "id": 3,
+  "name": "Test Teacher",
+  "url": "",
+  "description": "",
+  "link": "https://api.s2010456022.student.kwmhgb.at/author/testteacher/",
+  "slug": "testteacher",
+  "avatar_urls": {
+    "24": "https://secure.gravatar.com/avatar/df2420f70ff2549eb49949ead398e8a4?s=24&d=mm&r=g",
+    "48": "https://secure.gravatar.com/avatar/df2420f70ff2549eb49949ead398e8a4?s=48&d=mm&r=g",
+    "96": "https://secure.gravatar.com/avatar/df2420f70ff2549eb49949ead398e8a4?s=96&d=mm&r=g"
+  },
+  "meta": [],
+  "acf": {
+    "user_group": [
+      94
+    ]
+  },
+  "_links": {
+    "self": [
+      {
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/users/3"
+      }
+    ],
+    "collection": [
+      {
+        "href": "https://api.s2010456022.student.kwmhgb.at/jk-json/wp/v2/users"
+      }
+    ]
+  }
+}

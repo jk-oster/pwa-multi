@@ -1,0 +1,17 @@
+{
+  "title": "New Answer by REST API post",
+  "status": "publish",
+  "fields": {
+    "task": [ 117 ],
+    "user": 4,
+    "text": "Hi I am a text answer posted by REST API",
+    "image": {
+      "ID": "116",
+      "id": "116",
+      "title": "Jakob Osterberger - Punktgrafik",
+      "filename": "Jakob-Osterberger-Punktgrafik.png",
+      "name": "jakob-osterberger-punktgrafik",
+      "type": "image"
+    }
+  }
+}
