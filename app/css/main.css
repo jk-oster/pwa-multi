@@ -1,0 +1,18 @@
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
+#login_state {
+  display: block;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+}
+
+#submit_post_form.hidden {
+  display: none;
+}
