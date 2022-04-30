@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "watch": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "strict": true,
+  },
+  "include": ["assets/js/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"],
+}
