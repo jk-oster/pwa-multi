@@ -36,7 +36,7 @@ export default class KWMJS{
         };
         this.registerServiceWorker().then(() => {});
         this.utils = KWM_Utils;
-        this.translator = new KWM_Translator("de", "en");
+        this.translator = new KWM_Translator("en", "de");
         this.templater = new KWM_Templater(this.conf.webRoot+"/templates/");
         this.router = new KWM_Router();
     }
@@ -59,7 +59,7 @@ export default class KWMJS{
         return this.translator.translate(key);
     }
 
-    async render(templateName, container = this.conf.appContainer, values = false){
+    async render(templateName, container = this.conf.appContainer, values = false, mode="overwrite"){
         await this.templater.renderTemplate(templateName, container, values);
     }
 }

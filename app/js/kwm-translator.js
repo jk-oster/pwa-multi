@@ -17,7 +17,7 @@ export default class KWM_Translator {
 
     translate(key, language = this.currentLanguage) {
         if (!this[language]) return ` --Missing translation: non_existing_language "${language}"-- `;
-        if (!this[language][key]) return ` --Missing translation: non_existing_key "${key}"-- `;
+        if (!this[language][key]) return ` --Missing translation: "${key}"-- `;
         return this[language][key];
     }
 }
@@ -34,37 +34,28 @@ const KWM_Resources = {
         login: "Einloggen",
         logout: "Ausloggen",
         loginError: "Benutzername oder Passwort ungültig",
-
-
-        my_name_is: "Mein Name ist",
-        hello_world: "Hallo Welt",
-        it_is_me: "Ich bin's",
-        welcome_message: "Willkommen bei kwmJS",
-        click_me: "Klick mich!",
-        whoops: "Upsi, da ist wohl was schief gegangen!",
-        our_shop: "Unser Shop",
-        lets_go_shopping: "Lass uns shoppen gehen",
-        contact_headline: "Unsere Kontaktdaten",
-        contact_me: "Kontaktiere uns",
-
+        welcome: "Willkommen",
+        filter: "Filter",
+        new_question: "Neue Frage",
+        load_more: "Mehr laden",
+        save_and_back: "Speichern und zurück",
+        back: "Zurück",
+        profil: "Profil",
     },
     "en": {
-        my_name_is: "My name is",
-        hello_world: "Hello world",
-        it_is_me: "It's me",
-        welcome_message: "Welcome to kwmJS!",
-        click_me: "Click me!",
-        whoops: "Whoopsy Daisy! Something went wrong!",
-        our_shop: "Our Shop",
-        lets_go_shopping: "Lets go shopping",
-        contact_headline: "Our Contact Data",
-        contact_me: "Contact us",
+        username: "Username",
+        password: "Password",
+        login: "Login",
+        logout: "Logout",
+        loginError: "Username or password incorrect",
+        welcome: "Welcome",
+        filter: "Filter",
+        new_question: "New Question",
+        load_more: "Load more",
+        save_and_back: "Save and back",
+        back: "Back",
+        profil: "Profile",
     },
-    "ru": {
-        my_name_is: "Mein name auf Russisch",
-        hello_world: "Здравствуйте мир",
-        it_is_me: "Это я",
-    }
 };
 
 /* Expected result:
