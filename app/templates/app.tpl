@@ -13,18 +13,24 @@
                 </li>
             </ul>
         </nav>
-        <nav>
-            <ul class="nav nav-tabs justify-content-evenly">
-                <li class="nav-item">
-                    <button class="nav-link" id="tasks">Aufgaben</button>
-                </li>
-                <li class="nav-item">
-                    <button class="nav-link" id="questions">Fragen</button>
-                </li>
-            </ul>
-        </nav>
     </header>
-    <main id="container">
-        <p>Hier wird später der Tasks / Fragen Container gerendert</p>
-    </main>
+    <div class="card">
+        <div class="card-header">
+            <nav>
+                <ul class="nav nav-tabs card-header-tabs justify-content-evenly">
+                    <li class="nav-item">
+                        <button class="nav-link" id="tasks">Aufgaben</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link active" id="questions">Fragen</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="card-body">
+            <main id="container">
+                <p>Hier wird später der Tasks / Fragen Container gerendert</p>
+            </main>
+        </div>
+    </div>
 </section>
