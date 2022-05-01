@@ -7,14 +7,15 @@
                                 class="fa-solid fa-arrow-left"></i> %{back}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#/profile"><h2>%{profil}</h2></a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#/home" id="logout">%{logout} <i
                                 class="fa-solid fa-right-from-bracket"></i></a>
                 </li>
             </ul>
         </nav>
+        <div class="d-flex justify-content-center">
+            <a class="nav-link" href="#/profile"><h2>%{profil}</h2></a>
+        </div>
+        <hr class="mt-0">
     </header>
     <main>
         <form>

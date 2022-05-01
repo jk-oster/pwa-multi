@@ -65,11 +65,11 @@ async function loginClickHandler(e) {
     try {
         localStorage.clear();
         await fetchToken(view.DOM.input_username.value, view.DOM.input_password.value);
-        view.DOM.user_display_name.innerText = kwm.t('welcome') + " " + localStorage.display_name;
+        // view.DOM.user_display_name.innerText = kwm.t('welcome') + " " + localStorage.display_name;
         view.DOM.form_login.classList.add('visually-hidden');
         setTimeout(() => {
             kwm.router.changeView('/match');
-        }, 2500);
+        }, 0);
     } catch (err) {
         kwm.utils.showErrorMessage(err.message, view.DOM.msg_error);
     }

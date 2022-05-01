@@ -6,13 +6,14 @@
                     <p class="nav-link"></p>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#/app"><h2>Multi App</h2></a>
-                </li>
-                <li class="nav-item">
                     <a href="#/profile" class="nav-link">%{profil} <i class="fa fa-circle-user"></i></a>
                 </li>
             </ul>
         </nav>
+        <div class="d-flex justify-content-center">
+            <a class="nav-link" href="#/app"><h2>Multi App</h2></a>
+        </div>
+        <hr class="mt-0">
     </header>
     <div class="card">
         <div class="card-header">

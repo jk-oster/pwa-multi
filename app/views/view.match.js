@@ -32,11 +32,13 @@ view.rendering = async function(){
             partnername: partners[0].display_name,
             partnerdescription: partners[0].user_description,
         };
-        await kwm.render("components/match-details", view.DOM.container, templateData);
+        setTimeout(async () => {
+            await kwm.render("components/match-details", view.DOM.container, templateData);
+        }, 5000);
     }
     catch (err){
         // TODO implement matching
-        const text = 'TODO implement matching mechanism -> this user is in no Group / Chat <br>';
+        const text = 'TODO implement matching mechanism -> this user is in no Group / Chat <br><br>';
         kwm.utils.showErrorMessage(text + err.message, view.DOM.msg_error);
     }
 };

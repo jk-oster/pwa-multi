@@ -1,18 +1,19 @@
 <section id="login">
-    <header>
+    <header class="justify-content-center">
         <nav>
             <ul class="nav justify-content-between">
                 <li class="nav-item">
                     <a class="nav-link" href="#/home"><i class="fa-solid fa-arrow-left"></i> %{back}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#/login"><h2>Login</h2></a>
-                </li>
-                <li class="nav-item">
                     <p class="nav-link ml-"></p>
                 </li>
             </ul>
         </nav>
+        <div class="d-flex justify-content-center">
+            <a class="nav-link" href="#/login"><h2>Login</h2></a>
+        </div>
+        <hr class="mt-0">
     </header>
     <main>
         <div class="container">
