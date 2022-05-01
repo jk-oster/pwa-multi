@@ -1,10 +1,4 @@
 /.idea
-/app/css
-/app/images
-/app/js
-/app/sample_api_data
-/app/templates
-/app/views
 /node_modules/
 
 
