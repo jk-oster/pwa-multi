@@ -27,12 +27,12 @@
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">%{password}</label>
-                                <input type="password" class="form-control form-password" id="password" placeholder="*********">
+                                <input type="password" class="form-control" id="password" placeholder="*********">
                             </div>
-                            <div id="msg_error" class="alert alert-danger" role="alert"></div>
+                            <div id="msg_error" class="alert alert-danger visually-hidden" role="alert"></div>
                             <button id="btn_login" class="btn btn-primary">%{login}</button>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
