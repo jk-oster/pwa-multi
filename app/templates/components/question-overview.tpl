@@ -1,25 +1,30 @@
 <section id="question-detail">
     <nav>
-        <li>
-            <label for="filter">%{filter}</label>
-            <select name="filter" id="filter">
-                <!-- add filter options dynamically -->
-            </select>
-        </li>
-        <li>
-            <button>&{sort}</button>
-        </li>
+        <ul class="nav justify-content-between">
+            <li class="nav-item col-sm-12 col-md-6">
+                <label for="filter" class="form-label visually-hidden">%{filter}</label>
+                <select name="filter" id="filter" class="form-select">
+                    <!-- add filter options dynamically -->
+                </select>
+            </li>
+            <li class="nav-item col-sm-12 col-md-6">
+                <label for="sort" class="form-label visually-hidden">%{sort}</label>
+                <select name="sort" id="sort" class="form-select">
+                    <option value="asc" selected>%{asc}</option>
+                    <option value="desc">%{desc}</option>
+                </select>
+            </li>
+        </ul>
     </nav>
     <section>
-        <button id="new_question">%{new_question}</button>
+        <button id="new_question" class="card question my-1 container-fluid" >
+            <div class="card-body">
+                <h5 class="card-title">%{new_question} <i class="fa-solid fa-circle-question"></i></h5></i>
+            </div>
+        </button>
         <div id="question_container">
             <!-- add cards dynamically -->
-            <div class="question">Wer bist du?</div>
         </div>
     </section>
-    <div>
-        <li>
-            <button id="load_more">%{load_more}</button>
-        </li>
-    </div>
+    <button id="load_more" class="btn btn-primary">%{load_more}</button>
 </section>
