@@ -23,13 +23,26 @@ view.rendering = async function(){
     view.DOM = {
         btn_logout: document.querySelector("#logout"),
         save_and_back: document.querySelector("#save_and_back"),
+        input_name: document.querySelector("#name"),
+        input_description: document.querySelector("#description"),
     }
 
     view.DOM.btn_logout.addEventListener('click', function(){
         localStorage.clear();
     });
-    view.DOM.save_and_back.addEventListener('click', function(){
-        // TODO POST Profile data
-        history.back();
+    view.DOM.save_and_back.addEventListener('click', async function(){
+        const body = JSON.stringify({
+            display_name: view.DOM.input_name.value,
+            description: view.DOM.input_description.value,
+        });
+        try {
+            await kwm.utils.apiPOST('/wp/v2/users/'+localStorage.id + '?context=edit', kwm.utils.authHeader(), body);
+            localStorage.setItem('display_name', body.display_name);
+            localStorage.setItem('description', body.description);
+            history.back();
+        }
+        catch (e) {
+            console.log(e);
+        }
     });
 };
