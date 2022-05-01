@@ -17,7 +17,7 @@ export default class KWM_Templater {
         this.valueRegex = /&{(.*?)}/g;
     }
 
-    renderTemplate(templateName, container, values = false) {
+    renderTemplate(templateName, container, values = false, mode='overwrite') {
         return new Promise((resolve, reject) => {
             fetch(this.templatePath + templateName + ".tpl?v=0.2")
                 .then(response => response.text())
@@ -28,9 +28,10 @@ export default class KWM_Templater {
                     if (!template || typeof template !== 'string') {
                         reject(new Error('template invalid'));
                     }
-                    container.innerHTML = this.translateTemplateValues(template, values);
+                    if(mode === "append") container.innerHTML += this.translateTemplateValues(template, values);
+                    else container.innerHTML = this.translateTemplateValues(template, values);
                     resolve();
-                })
+                });
         });
     }
 
@@ -51,58 +52,3 @@ export default class KWM_Templater {
         return values[key];
     }
 }
-
-/*
-
-// Example-Code for Testing:
-const templater = new KWM_Templater("./templates/");
-const template = "";
-const container = document.getElementById("target_for_template"); //You can find this container in your index.html
-const values = {my_name: "Ronald McDonald", my_age: 45};
-console.log(templater.translateTemplateValues(template, values));
-console.log(templater.renderTemplate(template, container, values));
-
- */
-
-
-/*export default class KWM_Templater {
-    constructor(templatePath) {
-        this.templatePath = templatePath;
-    }
-
-    renderTemplate(templateName, container, values = false) {
-        return new Promise((resolve, reject) => {
-            fetch(this.templatePath + templateName + ".tpl?v=0.2")
-                .then(response => response.text())
-                .then(template => {
-                    let translations = /<%>/gi,
-                        data = /<&>/gi,
-                        translations_open = [],
-                        translations_close = [],
-                        data_open = [],
-                        data_close = [];
-
-                    let rendered = this.findAndFillEscapings(data, data_open, data_close, "fill", template);
-                    rendered = this.findAndFillEscapings(translations, translations_open, translations_close, "translate", rendered);
-                    container.innerHTML = rendered;
-                    resolve();
-                });
-        });
-    }
-
-    findAndFillEscapings(regex, open, close, mode, template) {
-        let even = true;
-        let rendered = template;
-        let result;
-        while (result = regex.exec(template)) {
-            even ? open.push(result.index) : close.push(result.index);
-            even = !even;
-        }
-        for (let i = 0; i < open.length; i++) {
-            let toReplace = template.substring(open[i] + 3, close[i]);
-            let replacing = mode === "translate" ? kwm.translator.translate(toReplace) : values[toReplace];
-            rendered = rendered.replace(template.substring(open[i], close[i] + 3), replacing);
-        }
-        return rendered;
-    }
-}*/
