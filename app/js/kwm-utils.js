@@ -1,12 +1,42 @@
 "use strict";
 
 /***************************************************
- *  A Collectorclass for several useful functions
+ *  A Collection class for several useful functions
+ *  - API request handling
+ *  - User device information
+ *  - DOM operations
  *
  *  KWM, 2022-03-28
  ***************************************************/
-
 export default class KWM_Utils {
+    static setSingleEventListener(element, type, callback, options = false) {
+        if(element) {
+            element.removeEventListener(type, callback);
+            element.addEventListener(type, callback, options);
+        }
+        else throw new Error('Element is ' + element);
+    }
+
+    static noLoginReRoute(route = '/login'){
+        // Check if user is logged in
+        if (localStorage.getItem('token') && localStorage.token !== 'undefined'){
+            localStorage.clear();
+            kwm.router.changeView(route);
+            return true;
+        }
+        return false;
+    }
+
+    static setConsoleMode(debug) {
+        if (!debug) {
+            if (!window.console) window.console = {};
+            let methods = ["log", "debug", "warn", "info"];
+            for (let i = 0; i < methods.length; i++) {
+                console[methods[i]] = function () {
+                };
+            }
+        }
+    }
 
     static isEmpty(variable) {
         if (Array.isArray(variable))
@@ -26,7 +56,7 @@ export default class KWM_Utils {
         return device;
     }
 
-    static getOS() {
+    static getClientOS() {
         return navigator.userAgentData ? navigator.userAgentData.platform : navigator.platform;
     }
 
@@ -77,7 +107,13 @@ export default class KWM_Utils {
         return paramMap;
     }
 
-    static async apiRequest(url, config = {}) {
+    /**
+     *
+     * @param url
+     * @param config
+     * @returns {Promise<any>}
+     */
+    static async request(url, config = {}) {
         return fetch(url, config)
             .then((response) => {
                 if (!response.ok) {
@@ -89,26 +125,126 @@ export default class KWM_Utils {
             .then((data) => data);
     }
 
+
     static async apiGET(url, headers = KWM_Utils.authHeader()) {
-        return KWM_Utils.apiRequest(kwm.conf.apiRoot + url,
+        return KWM_Utils.request(kwm.conf.apiRoot + url,
             {
                 method: 'GET',
                 headers: headers
             });
     }
 
-    static async apiPOST(url, headers = {}, body = {}){
-        return KWM_Utils.apiRequest(kwm.conf.apiRoot + url,
+    static async apiPOST(url, headers = {}, body = {}) {
+        return KWM_Utils.request(kwm.conf.apiRoot + url,
             {
                 method: 'POST',
                 headers: headers,
-                body: body}
+                body: body
+            }
         );
     }
 
-    static authHeader() {
+    static authHeader = () => {
         const myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + localStorage.token);
         return myHeaders;
+    }
+
+    /**
+     * Helper Function: Remove spaces
+     * @param { string } str Pending string
+     * @param  { number } type Remove space type 1 - all spaces 2 - before and after spaces 3 - before and after spaces 4 - after spaces default to 1
+     */
+    static trim = (str, type = 1) => {
+        if (type && type !== 1 && type !== 2 && type !== 3 && type !== 4) return;
+        switch (type) {
+            case 1:
+                return str.replace(/\s/g, "");
+            case 2:
+                return str.replace(/(^\s)|(\s*$)/g, "");
+            case 3:
+                return str.replace(/(^\s)/g, "");
+            case 4:
+                return str.replace(/(\s$)/g, "");
+            default:
+                return str;
+        }
+    }
+
+    static showErrorMessage(message, elem = undefined) {
+        console.log(message);
+        if (elem) {
+            elem.classList.remove('visually-hidden');
+            elem.innerHTML = message;
+        }
+    }
+
+    /**
+     * Helper Function: Focuses first element matching selector
+     * @param selector
+     */
+    static focusFirst = (selector) => {
+        document.querySelector(selector).focus();
+    }
+
+    /**
+     * Helper Constant: Checks if element has Class
+     * @param el element
+     * @param className
+     * @returns {boolean}
+     */
+    static hasClass = (el, className) => el.classList.contains(className);
+
+    /**
+     * Helper Constant: Smoothly scroll to top of page
+     */
+    static scrollToTop = () => {
+        const c = document.documentElement.scrollTop || document.body.scrollTop;
+        if (c > 0) {
+            window.requestAnimationFrame(KWM_Utils.scrollToTop);
+            window.scrollTo(0, c - c / 8);
+        }
+    }
+
+    /**
+     * Helper Function: Shorthand for document.querySelector()
+     * @param selector querySelector
+     * @returns {*}
+     */
+    static sel = (selector) => {
+        return document.querySelector(selector);
+    }
+
+    /**
+     * Helper Function: Shorthand for document.querySelectorAll()
+     * @param selector querySelectorAll
+     * @returns {NodeListOf<*>}
+     */
+    static selAll = (selector) => {
+        return document.querySelectorAll(selector);
+    }
+
+    /**
+     * Helper Function: Checks if an object is iterable
+     * @param obj
+     * @returns {boolean}
+     */
+    static isIterable = (obj) => {
+        // checks for null and undefined
+        if (obj == null) {
+            return false;
+        }
+        return typeof obj[Symbol.iterator] === 'function';
+    }
+
+    /**
+     * Helper Function: Wraps an object into an array if not iterable
+     * @param el
+     * @returns {*[]|*}
+     */
+    static convertToIterable = (el) => {
+        if (!KWM_Utils.isIterable(el)) {
+            return [el];
+        } else return el;
     }
 }
