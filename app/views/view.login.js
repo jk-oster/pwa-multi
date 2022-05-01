@@ -12,6 +12,8 @@ export let view = new KWM_Route("/login", async function () {
 });
 
 view.rendering = async function () {
+    await kwm.render("login", kwm.conf.appContainer, {});
+
     // Check if user is logged in
     if (localStorage.token) {
         // Forward user
@@ -19,8 +21,6 @@ view.rendering = async function () {
     }
     // Render Login form
     else {
-        await kwm.render("login", kwm.conf.appContainer, {});
-
         view.DOM = {
             btn_login: document.querySelector('#btn_login'),
             btn_logout: document.querySelector('#btn_logout'),
@@ -36,15 +36,11 @@ view.rendering = async function () {
             try {
                 await login(view.DOM.input_username.value, view.DOM.input_password.value);
                 view.DOM.user_display_name.innerText = kwm.t('welcome') + localStorage.display_name;
-                view.DOM.login_state.classList.remove('red');
-                view.DOM.login_state.classList.add('green');
                 setTimeout(() => {
                     kwm.router.changeView('/match');
-                }, 5000);
+                }, 2500);
             } catch (err) {
                 console.error(err);
-                view.DOM.login_state.classList.remove('green');
-                view.DOM.login_state.classList.add('red');
                 view.DOM.msg_error.innerText = kwm.t('loginError');
             }
         });
@@ -67,7 +63,7 @@ async function login(username = '', password = '') {
     localStorage.setItem('first_name', response.first_name);
     localStorage.setItem('last_name', response.last_name);
     localStorage.setItem('display_name', response.display_name);
-    localStorage.setItem('description', response.display_name);
+    localStorage.setItem('description', response.description);
     localStorage.setItem('group', response.group);
     console.log(response);
 
@@ -96,8 +92,8 @@ async function login(username = '', password = '') {
             localStorage.setItem('chatstart', userChat.acf.stardate);
             localStorage.setItem('questions', JSON.stringify(userChat.acf.questions));
             localStorage.setItem('tasks', JSON.stringify(userChat.acf.tasks));
-            const parnters = userChat.acf.users.filter(user => user.ID !== Number(localStorage.id));
-            localStorage.setItem('parnters', JSON.stringify(parnters));
+            const partners = userChat.acf.users.filter(user => user.ID !== Number(localStorage.id));
+            localStorage.setItem('partners', JSON.stringify(partners));
         }
         console.log(userChat);
     }
