@@ -13,7 +13,7 @@ import KWM_Router from "./kwm-router.js?v=0.2";
  *     webRoot - Give me the root-URL of your App
  *     apiRoot - Give me the root-URL of your API
  *
- *     KWM - 2022-03-28
+ *     Jakob Osterberger - 2022-03-28
  **********************************************************************/
 
 export default class KWMJS{
@@ -24,20 +24,25 @@ export default class KWMJS{
         }
         KWMJS._instance = this;
 
+        // Add KWMJS as global object to window
         window.kwm = this;
 
         // Options config
         this.conf = {
             appContainer: document.getElementById('kwmJS'),
             debugMode: true,
-            webRoot: window.location.origin + window.location.pathname.replace('/index.html',''),
+            webRoot: 'https://app.s2010456022.student.kwmhgb.at', // window.location.origin + window.location.pathname.replace('/index.html',''),
             apiRoot: 'https://api.s2010456022.student.kwmhgb.at/jk-json',
-            serviceworkerLocation: './serviceworker.js',
+            serviceworkerPath: './serviceworker.js',
+            templatesPath: '/templates/',
+            languages: ["en", "de"],
         };
-        this.registerServiceWorker().then(() => {});
+
         this.utils = KWM_Utils;
-        this.translator = new KWM_Translator("en", "de");
-        this.templater = new KWM_Templater(this.conf.webRoot+"/templates/");
+        this.utils.setConsoleMode(this.conf.debugMode);
+        this.registerServiceWorker().then(() => {});
+        this.translator = new KWM_Translator(this.conf.languages);
+        this.templater = new KWM_Templater(this.conf.webRoot+ this.conf.templatesPath);
         this.router = new KWM_Router();
     }
 
@@ -46,7 +51,7 @@ export default class KWMJS{
         if ('serviceWorker' in navigator) {
             try {
                 // register Serviceworker
-                await navigator.serviceWorker.register(this.conf.serviceworkerLocation);
+                await navigator.serviceWorker.register(this.conf.serviceworkerPath);
                 console.log("serviceWorker registered");
             } catch (error) {
                 console.log("serviceWorker registration failed", error);
@@ -60,6 +65,6 @@ export default class KWMJS{
     }
 
     async render(templateName, container = this.conf.appContainer, values = false, mode="overwrite"){
-        await this.templater.renderTemplate(templateName, container, values);
+        await this.templater.renderTemplate(templateName, container, values, mode);
     }
 }
