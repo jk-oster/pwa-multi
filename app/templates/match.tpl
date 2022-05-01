@@ -3,37 +3,23 @@
         <nav>
             <ul class="nav justify-content-between">
                 <li class="nav-item">
-                    <a class="nav-link" href="#/match" class="back" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i> %{back}</a>
+                    <a class="nav-link" href="#/match" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i> %{back}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#/match" class="back"><h2>Match</h2></a>
+                    <a class="nav-link" href="#/match"><h2>Match</h2></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#/profile" class="back">%{profil} <i class="fa fa-circle-user"></a>
+                    <a href="#/profile" class="nav-link">%{profil} <i class="fa fa-circle-user"></i></a>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
-        <div>
-            <h3>Wir suchen deinen Partner</h3>
-            <p>Schöne Matching Animation</p>
-        </div>
-        <div>
-            <h3>Wir haben deinen Partner gefunden</h3>
+        <div id="container">
             <div>
-                <img src="" alt="">
-                <p>&{username}</p>
-            </div>
-            <div>
-                <img src="" alt="">
-                <p>&{partnername}</p>
-            </div>
-            <div>
-                <p>&{description}</p>
-            </div>
-            <div>
-                <p>&{partnerdescription}</p>
+                <h3>Wir suchen deinen Partner</h3>
+                <p>Schöne Matching Animation</p>
+                <div id="msg_error" class="alert alert-danger visually-hidden" role="alert"></div>
             </div>
         </div>
     </main>
