@@ -1,25 +1,25 @@
 <section id="wrapper">
     <header>
         <nav>
-            <ul>
-                <li>
-                    <p>Hier gibts kein Zurück</p>
+            <ul class="nav justify-content-between">
+                <li class="nav-item">
+                    <p class="nav-link"></p>
                 </li>
-                <li>
-                    <a href="#/app" class="back"><h2>Multi App</h2></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#/app"><h2>Multi App</h2></a>
                 </li>
-                <li>
-                    <a href="#/profile" class="back">Profil</a>
+                <li class="nav-item">
+                    <a href="#/profile" class="nav-link">%{profil} <i class="fa fa-circle-user"></i></a>
                 </li>
             </ul>
         </nav>
         <nav>
-            <ul>
-                <li>
-                    <span id="tasks">Aufgaben</span>
+            <ul class="nav nav-tabs justify-content-evenly">
+                <li class="nav-item">
+                    <button class="nav-link" id="tasks">Aufgaben</button>
                 </li>
-                <li>
-                    <span id="questions">Fragen</span>
+                <li class="nav-item">
+                    <button class="nav-link" id="questions">Fragen</button>
                 </li>
             </ul>
         </nav>

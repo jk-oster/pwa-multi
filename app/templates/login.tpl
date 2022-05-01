@@ -1,30 +1,40 @@
 <section id="login">
     <header>
         <nav>
-            <ul>
-                <li>
-                    <a href="#/home" class="back">Zurück</a>
+            <ul class="nav justify-content-between">
+                <li class="nav-item">
+                    <a class="nav-link" href="#/home"><i class="fa-solid fa-arrow-left"></i> %{back}</a>
                 </li>
-                <li>
-                    <a href="#/login"><h2>Login</h2></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#/login"><h2>Login</h2></a>
                 </li>
-                <li>
-                    <p>Kein Menüeintrag hier</p>
+                <li class="nav-item">
+                    <p class="nav-link ml-"></p>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
-        <p><span id="login_state" class=""></span>
-            <span id="user_display_name"></span>
-        </p>
-        <form action="" id="frm_login">
-            <label for="username">%{username}</label>
-            <input type="text" id="username" placeholder="username">
-            <label for="password">%{password}</label>
-            <input type="password" id="password" placeholder="*********">
-            <button id="btn_login">%{login}</button>
-        </form>
-        <p id="msg_error" class="error"></p>
+        <div class="container">
+            <div class="row  justify-content-center">
+                <div class="col col-lg-6 col-sm-12">
+                    <div>
+                        <h3 id="user_display_name"></h3>
+                        <form id="frm_login">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">%{username}</label>
+                                <input type="text" id="username" class="form-control" placeholder="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">%{password}</label>
+                                <input type="password" class="form-control form-password" id="password" placeholder="*********">
+                            </div>
+                            <div id="msg_error" class="alert alert-danger" role="alert"></div>
+                            <button id="btn_login" class="btn btn-primary">%{login}</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
 </section>

@@ -1,15 +1,15 @@
 <section id="wrapper">
     <header>
         <nav>
-            <ul>
-                <li>
-                    <a href="#/profil" class="back">Zurück</a>
+            <ul class="nav justify-content-between">
+                <li class="nav-item">
+                    <a class="nav-link" href="#/match" class="back" onclick="history.back()"><i class="fa-solid fa-arrow-left"></i> %{back}</a>
                 </li>
-                <li>
-                    <a href="#/match" class="back"><h2>Match</h2></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#/match" class="back"><h2>Match</h2></a>
                 </li>
-                <li>
-                    <a href="#/profile" class="back">Profil</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#/profile" class="back">%{profil} <i class="fa fa-circle-user"></a>
                 </li>
             </ul>
         </nav>
@@ -27,10 +27,10 @@
             </div>
             <div>
                 <img src="" alt="">
-                <p>&{parntername}</p>
+                <p>&{partnername}</p>
             </div>
             <div>
-                <p>&{userdescription}</p>
+                <p>&{description}</p>
             </div>
             <div>
                 <p>&{partnerdescription}</p>
