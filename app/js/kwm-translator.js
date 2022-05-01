@@ -7,7 +7,7 @@
  *     @author Jakob Osterberger - 2022-03-28
  **********************************************************************/
 export default class KWM_Translator {
-    constructor(...languages) {
+    constructor(languages = []) {
         if (languages.length === 0) return console.error('Error: No languages specified');
         for (const lang of languages) {
             this[lang] = KWM_Resources[lang];
@@ -41,6 +41,7 @@ const KWM_Resources = {
         save_and_back: "Speichern und zurück",
         back: "Zurück",
         profil: "Profil",
+        forward_to_app: "Los geht, starte jetzt",
     },
     "en": {
         username: "Username",
@@ -55,14 +56,6 @@ const KWM_Resources = {
         save_and_back: "Save and back",
         back: "Back",
         profil: "Profile",
+        forward_to_app: "Everything ready, let's go"
     },
 };
-
-/* Expected result:
-
-Hallo Welt
-It's me
-Здравствуйте мир
---Missing translation: non_existing_key--
-
- */

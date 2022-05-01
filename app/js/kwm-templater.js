@@ -9,7 +9,6 @@
  *
  *     @author Jakob Osterberger - 2022-03-28
  *******************************************************/
-
 export default class KWM_Templater {
     constructor(templatePath) {
         this.templatePath = templatePath;
