@@ -1,5 +1,6 @@
-<div class="question card">
+<div id="answer_&{id}" data-user="&{userid}" class="answer card">
     <div class="card-body">
-        <p>&{question}</p>
+        <p>&{answer}</p>
+        <p>&{date}</p>
     </div>
 </div>
