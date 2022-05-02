@@ -17,7 +17,7 @@ view.rendering = async function(){
         name: localStorage.display_name,
         description: localStorage.description,
     }
-
+    
     await kwm.render("profile",kwm.conf.appContainer,templateData);
 
     view.DOM = {
