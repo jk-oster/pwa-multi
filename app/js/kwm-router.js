@@ -7,6 +7,7 @@ import {view as route404} from '../views/view.404.js?v=0.2';
 import {view as login} from '../views/view.login.js?v=0.2';
 import {view as profile} from '../views/view.profile.js?v=0.2';
 import {view as match} from '../views/view.match.js?v=0.2';
+import {view as question} from '../views/view.question.js?v=0.2';
 
 /*******************************************************
  *     Hash-based router for Single Page Applications.
@@ -16,7 +17,7 @@ import {view as match} from '../views/view.match.js?v=0.2';
  *******************************************************/
 export default class KWM_Router {
     constructor() {
-        this.routes = [home, route404, app, login, profile, match];
+        this.routes = [home, route404, app, login, profile, match, question];
         this.routeHome = home;
         this.route404 = route404;
 
@@ -34,6 +35,13 @@ export default class KWM_Router {
     }
 
     changeViewHandler() {
+        // Switch by e.q. '?lang=de'
+        const params = kwm.utils.getGetParameters();
+        if(!kwm.utils.isEmpty(params) && 'lang' in params.params){
+            kwm.translator.currentLanguage = params.params.lang;
+        }
+
+        // Handle view change
         if (location.hash === '#/' || location.hash === '') {
             this.routeHome.init();
             return;
