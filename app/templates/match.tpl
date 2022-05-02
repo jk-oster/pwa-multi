@@ -1,5 +1,5 @@
 <section id="wrapper">
-    <header>
+    <header class="sticky-top">
         <nav>
             <ul class="nav justify-content-between">
                 <li class="nav-item">
@@ -11,7 +11,7 @@
             </ul>
         </nav>
         <div class="d-flex justify-content-center">
-            <a class="nav-link" href="#/match"><h2>Match</h2></a>
+            <a class="nav-link" href="#/match"><h2><i class="fa-solid fa-user-group"></i> Match</h2></a>
         </div>
         <hr class="mt-0">
     </header>

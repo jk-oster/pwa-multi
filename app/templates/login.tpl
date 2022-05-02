@@ -1,5 +1,5 @@
 <section id="login">
-    <header class="justify-content-center">
+    <header class="justify-content-center sticky-top">
         <nav>
             <ul class="nav justify-content-between">
                 <li class="nav-item">
@@ -11,7 +11,7 @@
             </ul>
         </nav>
         <div class="d-flex justify-content-center">
-            <a class="nav-link" href="#/login"><h2>Login</h2></a>
+            <a class="nav-link" href="#/login"><h2><i class="fa-solid fa-right-to-bracket"></i> Login</h2></a>
         </div>
         <hr class="mt-0">
     </header>

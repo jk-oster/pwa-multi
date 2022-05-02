@@ -1,5 +1,5 @@
 <section id="wrapper">
-    <header>
+    <header class="sticky-top overflow-hidden">
         <nav>
             <ul class="nav justify-content-between">
                 <li class="nav-item">
@@ -13,7 +13,7 @@
             </ul>
         </nav>
         <div class="d-flex justify-content-center">
-            <a class="nav-link" href="#/profile"><h2>%{profil}</h2></a>
+            <a class="nav-link" href="#/profile"><h2><i class="fa-solid fa-circle-user"></i> %{profil}</h2></a>
         </div>
         <hr class="mt-0">
     </header>
@@ -35,11 +35,11 @@
 
             <div class="mb-3">
                 <label for="description" class="form-label">Example textarea</label>
-                <textarea id="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <textarea id="description" class="form-control" rows="3"></textarea>
             </div>
 
-            <a id="save_and_back" class="btn btn-primary btn-alt" href="#/app">%{save_and_back} <i
-                        class="fa-solid fa-floppy-disk"></i></a>
+            <button id="save_and_back" class="btn btn-primary">%{save_and_back} <i
+                        class="fa-solid fa-floppy-disk"></i></button>
         </form>
     </main>
 </section>

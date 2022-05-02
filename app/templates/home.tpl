@@ -1,5 +1,5 @@
 <div class="wrapper">
-    <header>
+    <header class="sticky-top">
         <nav>
             <ul class="nav justify-content-between">
                 <li class="nav-item">
@@ -12,7 +12,7 @@
             </ul>
         </nav>
         <div class="d-flex justify-content-center">
-            <a class="nav-link" href="#/home"><h2>Startpage / Homepage</h2></a>
+            <a class="nav-link" href="#/home"><h2><i class="fa-solid fa-house"></i> Startpage / Homepage</h2></a>
         </div>
         <hr class="mt-0">
     </header>
@@ -25,7 +25,7 @@
             Rump cow cupim bacon corned beef sirloin salami pastrami strip steak chuck beef ribs ball tip.
             Biltong ground round meatball andouille, swine brisket jerky short loin ham boudin.
         </p>
-        <a href="#/login" class="btn btn-primary">%{login}</a>
+        <a href="#/login" class="btn btn-primary">%{login} <i class="fa fa-sign-in" aria-hidden="true"></i></a>
     </main>
 </div>
 
