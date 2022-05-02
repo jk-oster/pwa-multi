@@ -27,6 +27,10 @@ export default class KWM_Utils {
         return false;
     }
 
+    static isOnline(){
+        return navigator.onLine;
+    }
+
     static setConsoleMode(debug) {
         if (!debug) {
             if (!window.console) window.console = {};
@@ -49,10 +53,10 @@ export default class KWM_Utils {
 
     static getOS() {
         let device = "Unknown Device";
-        if (navigator.appVersion.indexOf("Win") != -1) device = "Windows";
-        if (navigator.appVersion.indexOf("Mac") != -1) device = "MacOS"; //iPad Pro & iPhone 6 :)
-        if (navigator.appVersion.indexOf("Android") != -1) device = "Android";
-        if (navigator.appVersion.indexOf("iOS") != -1) device = "iOS";
+        if (navigator.appVersion.indexOf("Win") !== -1) device = "Windows";
+        if (navigator.appVersion.indexOf("Mac") !== -1) device = "MacOS"; //iPad Pro & iPhone 6 :)
+        if (navigator.appVersion.indexOf("Android") !== -1) device = "Android";
+        if (navigator.appVersion.indexOf("iOS") !== -1) device = "iOS";
         return device;
     }
 
