@@ -38,6 +38,8 @@ export default class KWMJS{
             languages: ["en", "de"],
         };
 
+        this.cache = {};
+
         this.utils = KWM_Utils;
         this.utils.setConsoleMode(this.conf.debugMode);
         this.registerServiceWorker().then(() => {});
