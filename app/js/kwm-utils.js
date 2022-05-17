@@ -1,25 +1,31 @@
 "use strict";
 
 /***************************************************
- *  A Collection class for several useful functions
+ *  A Collection class for several useful static functions for KWMJS
  *  - API request handling
  *  - User device information
  *  - DOM operations
  *
- *  KWM, 2022-03-28
+ *  @author Jakob Osterberger - 2022-04-05
  ***************************************************/
 export default class KWM_Utils {
+    /**
+     * Registers new event listener, if there already is the listener registered removes the previous one
+     * @param element
+     * @param type
+     * @param callback
+     * @param options
+     */
     static setSingleEventListener(element, type, callback, options = false) {
-        if(element) {
+        if (element) {
             element.removeEventListener(type, callback);
             element.addEventListener(type, callback, options);
-        }
-        else throw new Error('Element is ' + element);
+        } else throw new Error('Element is ' + element);
     }
 
-    static noLoginReRoute(route = '/login'){
+    static noLoginReRoute(route = '/login') {
         // Check if user is logged in
-        if (localStorage.getItem('token') && localStorage.token !== 'undefined'){
+        if (localStorage.getItem('token') && localStorage.token !== 'undefined') {
             localStorage.clear();
             kwm.router.changeView(route);
             return true;
@@ -27,10 +33,14 @@ export default class KWM_Utils {
         return false;
     }
 
-    static isOnline(){
+    static isOnline() {
         return navigator.onLine;
     }
 
+    /**
+     * Prevents console logs
+     * @param debug
+     */
     static setConsoleMode(debug) {
         if (!debug) {
             if (!window.console) window.console = {};
@@ -42,6 +52,11 @@ export default class KWM_Utils {
         }
     }
 
+    /**
+     * Checks if value is undefined or [] or {}
+     * @param variable
+     * @returns {boolean}
+     */
     static isEmpty(variable) {
         if (Array.isArray(variable))
             return (variable.length === 0);
@@ -49,6 +64,36 @@ export default class KWM_Utils {
             return (Object.entries(variable).length === 0 && variable.constructor === Object);
         else
             return (typeof variable === "undefined" || variable == null || variable === "");
+    }
+
+    /**
+     * Deep compares two objects
+     * @param object1
+     * @param object2
+     * @returns {boolean}
+     */
+    static deepEqual(object1, object2) {
+        const keys1 = Object.keys(object1);
+        const keys2 = Object.keys(object2);
+        if (keys1.length !== keys2.length) {
+            return false;
+        }
+        for (const key of keys1) {
+            const val1 = object1[key];
+            const val2 = object2[key];
+            const areObjects = this.isObject(val1) && this.isObject(val2);
+            if (
+                areObjects && !this.deepEqual(val1, val2) ||
+                !areObjects && val1 !== val2
+            ) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    static isObject(object) {
+        return object != null && typeof object === 'object';
     }
 
     static getOS() {
@@ -88,6 +133,10 @@ export default class KWM_Utils {
         return array.map(obj => obj[property]).indexOf(value);
     }
 
+    /**
+     * Gets URL params after #
+     * @returns {{}|{params: {[p: string]: string}}}
+     */
     static getGetParameters() {
         const hash = location.hash;
         const index = hash.indexOf("?");
@@ -112,10 +161,10 @@ export default class KWM_Utils {
     }
 
     /**
-     *
+     * Sends fetch request and returns response as object
      * @param url
      * @param config
-     * @returns {Promise<any>}
+     * @returns {Promise<any>} JS-Object
      */
     static async request(url, config = {}) {
         return fetch(url, config)
@@ -123,13 +172,19 @@ export default class KWM_Utils {
                 if (!response.ok) {
                     console.error(response.statusText + ' at ' + url);
                     console.error(config);
+                    console.error(response);
                 }
                 return response.json();
             })
             .then((data) => data);
     }
 
-
+    /**
+     * Sends GET request with AuthHeader
+     * @param url
+     * @param headers
+     * @returns {Promise<*>} JS-Object
+     */
     static async apiGET(url, headers = KWM_Utils.authHeader()) {
         return KWM_Utils.request(kwm.conf.apiRoot + url,
             {
@@ -138,6 +193,13 @@ export default class KWM_Utils {
             });
     }
 
+    /**
+     * Sends POST request
+     * @param url only put the relative path starting from kwm.conf.apiRoot
+     * @param headers
+     * @param body
+     * @returns {Promise<*>} JS-Object
+     */
     static async apiPOST(url, headers = {}, body = {}) {
         return KWM_Utils.request(kwm.conf.apiRoot + url,
             {
@@ -148,9 +210,36 @@ export default class KWM_Utils {
         );
     }
 
-    static authHeader = () => {
-        const myHeaders = new Headers();
+    /**
+     * Sends PUT request
+     * @param url only put the relative path starting from kwm.conf.apiRoot
+     * @param headers
+     * @param body
+     * @returns {Promise<*>} JS-Object
+     */
+    static async apiPUT(url, headers = {}, body = {}) {
+        return KWM_Utils.request(kwm.conf.apiRoot + url,
+            {
+                method: 'PUT',
+                headers: headers,
+                body: body
+            }
+        );
+    }
+
+    /**
+     * Return AuthHeader with bearer token from localStorage
+     * @returns {Headers}
+     */
+    static authHeader = (headers = null) => {
+        const myHeaders = headers ? headers : new Headers();
         myHeaders.append("Authorization", "Bearer " + localStorage.token);
+        return myHeaders;
+    }
+
+    static jsonBodyHeader = (headers = null) => {
+        const myHeaders = headers ? headers : new Headers();
+        myHeaders.append("Content-Type", "application/json");
         return myHeaders;
     }
 
@@ -175,6 +264,11 @@ export default class KWM_Utils {
         }
     }
 
+    /**
+     * Displays Error in specified HTMLElement
+     * @param message
+     * @param elem
+     */
     static showErrorMessage(message, elem = undefined) {
         console.log(message);
         if (elem) {
@@ -202,12 +296,18 @@ export default class KWM_Utils {
     /**
      * Helper Constant: Smoothly scroll to top of page
      */
-    static scrollToTop = () => {
+    static scrollToTop = (container = null) => {
+        const cont = container ? container : window;
         const c = document.documentElement.scrollTop || document.body.scrollTop;
         if (c > 0) {
-            window.requestAnimationFrame(KWM_Utils.scrollToTop);
-            window.scrollTo(0, c - c / 8);
+            cont.requestAnimationFrame(KWM_Utils.scrollToTop);
+            cont.scrollTo(0, c - c / 8);
         }
+    }
+
+    static scrollToBottom = (container = null) => {
+        const cont = container ? container : window;
+        cont.scrollTo(0, document.body.scrollHeight);
     }
 
     /**

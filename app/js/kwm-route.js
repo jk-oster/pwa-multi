@@ -5,6 +5,8 @@
  *     therefore bound to one single (unique) View.
  *
  *     KWM - 2022-03-30
+ *
+ *     @author Jakob Osterberger - 2022-04-05
  *******************************************************/
 export default class KWM_Route {
     constructor(slug, init) {
