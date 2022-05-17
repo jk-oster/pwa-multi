@@ -12,37 +12,48 @@ export let view = new KWM_Route("/profile", async function(){
 });
 
 view.rendering = async function(){
-
-    const templateData = {
-        name: localStorage.display_name,
-        description: localStorage.description,
-    }
-    
-    await kwm.render("profile",kwm.conf.appContainer,templateData);
+    await kwm.render("profile",kwm.conf.appContainer,kwm.model.user);
 
     view.DOM = {
         btn_logout: document.querySelector("#logout"),
         save_and_back: document.querySelector("#save_and_back"),
         input_name: document.querySelector("#name"),
         input_description: document.querySelector("#description"),
+        lang: document.querySelector('#lang')
     }
 
-    view.DOM.btn_logout.addEventListener('click', function(){
-        localStorage.clear();
-    });
-    view.DOM.save_and_back.addEventListener('click', async function(){
-        const body = JSON.stringify({
-            display_name: view.DOM.input_name.value,
-            description: view.DOM.input_description.value,
-        });
+    kwm.utils.setSingleEventListener(view.DOM.btn_logout,'click', () => kwm.model.logout());
+
+    kwm.utils.setSingleEventListener(view.DOM.save_and_back,'click', async function(event){
+        event.preventDefault();
         try {
-            await kwm.utils.apiPOST('/wp/v2/users/'+localStorage.id + '?context=edit', kwm.utils.authHeader(), body);
-            localStorage.setItem('display_name', body.display_name);
-            localStorage.setItem('description', body.description);
-            history.back();
+            let imgId = 0;
+            let imgUrl = '';
+            if(document.getElementById("avatar").files.length !== 0){
+                try {
+                    const media = document.querySelector('#avatar');
+                    const resp = await kwm.model.mediaUpload(media);
+                    console.log(media);
+                    imgId = resp.id;
+                    imgUrl = resp.media_details.sizes.medium.source_url;
+                    console.log(resp);
+                    document.querySelector('#img_avatar').src = imgUrl;
+                } catch (e) {
+                    console.log(e);
+                }
+            }
+            const newUserData = await kwm.model.updateUser(view.DOM.input_name.value, view.DOM.input_description.value, imgId);
+            console.log(newUserData);
+            kwm.router.changeView('/app');
         }
         catch (e) {
             console.log(e);
         }
+    });
+
+    kwm.utils.setSingleEventListener(view.DOM.lang,'change', () => {
+        kwm.translator.currentLanguage = view.DOM.lang.value;
+        kwm.model.setLanguage(view.DOM.lang.value);
+        view.rendering();
     });
 };
