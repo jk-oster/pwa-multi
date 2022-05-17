@@ -1,13 +1,11 @@
 <section id="question-detail">
     <nav>
         <ul class="nav justify-content-between">
-            <li class="nav-item col-sm-12 col-md-6">
-                <label for="filter" class="form-label visually-hidden">%{filter}</label>
-                <select name="filter" id="filter" class="form-select">
-                    <!-- add filter options dynamically -->
-                </select>
+            <li class="nav-item col-6">
+                <label for="search" class="form-label visually-hidden">%{search}</label>
+                <input type="search" id="search" class="form-control" placeholder="%{search}" aria-label="Search" />
             </li>
-            <li class="nav-item col-sm-12 col-md-6">
+            <li class="nav-item col-6">
                 <label for="sort" class="form-label visually-hidden">%{sort}</label>
                 <select name="sort" id="sort" class="form-select">
                     <option value="asc" selected>%{asc}</option>
