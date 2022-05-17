@@ -37,34 +37,11 @@ view.rendering = async function () {
     }
 };
 
-
-async function fetchToken(username = '', password = '') {
-    const headers = {
-        'Content-Type': 'application/json'
-    }
-    const body = JSON.stringify({
-        username: username,
-        password: password,
-    });
-    const response = await kwm.utils.apiPOST('/jwt-auth/v1/token', headers, body);
-    if ('token' in response) {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('id', response.id);
-        localStorage.setItem('nicename', response.nicename);
-        localStorage.setItem('first_name', response.first_name);
-        localStorage.setItem('last_name', response.last_name);
-        localStorage.setItem('display_name', response.display_name);
-        localStorage.setItem('description', response.description);
-        localStorage.setItem('group', response.group);
-        console.log(response);
-    } else throw Error(response.message);
-}
-
 async function loginClickHandler(e) {
     e.preventDefault(); // Prevent "Submit Action"
     try {
         localStorage.clear();
-        await fetchToken(view.DOM.input_username.value, view.DOM.input_password.value);
+        await kwm.model.getUser(view.DOM.input_username.value, view.DOM.input_password.value);
         // view.DOM.user_display_name.innerText = kwm.t('welcome') + " " + localStorage.display_name;
         view.DOM.form_login.classList.add('visually-hidden');
         setTimeout(() => {
