@@ -16,20 +16,20 @@
         </div>
         <hr class="mt-0">
     </header>
-    <main id="answer-container">
-        <div class="d-flex justify-content-center">
-            <div>
-                <div class="lds-ring">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
+    <main>
+        <div id="answer-container">
+            <f:template name="components/loading-spinner"></f:template>
+            <!-- answers will be displayed here -->
         </div>
-        <!-- answers will be displayed here -->
     </main>
-    <button id="load_more" class="btn btn-primary">%{load_more}</button>
-    <button id="new_answer" class="btn btn-primary">%{new_answer}</button>
+    <footer class="fixed-bottom">
+        <div class="py-1 mx-1 row">
+            <div contenteditable="true" class="edit col-10 white border rounded p-1" id="new_answer_text"></div>
+            <button class="btn btn-primary col-2 align-self-end" id="send">
+                <span class="visually-hidden">Send</span>
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </footer>
 </section>
 
