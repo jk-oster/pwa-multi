@@ -13,6 +13,10 @@ import {view as question} from '../views/view.question.js?v=0.2';
  *     Hash-based router for Single Page Applications.
  *     Handles Routes behind a '/#/' to your convenience.
  *
+ *     @param routes - Give me all the views you have
+ *     @param routeHome - Default route for page load
+ *     @param route404 - Default route when unidentified slug is put into URL
+ *
  *     @author Jakob Osterberger - 2022-03-30
  *******************************************************/
 export default class KWM_Router {
@@ -42,10 +46,11 @@ export default class KWM_Router {
         }
 
         // Handle view change
-        if (location.hash === '#/' || location.hash === '') {
+        if (location.hash === '#/' || location.hash === '' || location.hash === '#/home') {
             this.routeHome.init();
             return;
-        } else {
+        } 
+        else {
             const activeRoute = this.routes.find(route => route.isActive());
             if (activeRoute) activeRoute.init();
             else {
