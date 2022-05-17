@@ -1,8 +1,9 @@
 <div>
     <h3>Wir haben deinen Partner gefunden</h3>
     <div>
+        <% console.log(this) %>
         <img src="" alt="">
-        <p>&{username}</p>
+        <p>&{nickname}</p>
     </div>
     <div>
         <img src="" alt="">
