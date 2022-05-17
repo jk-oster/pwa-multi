@@ -34,7 +34,6 @@ view.rendering = async function () {
         kwm.utils.setSingleEventListener(view.DOM.tasks, 'click', toggleView);
         kwm.utils.setSingleEventListener(view.DOM.questions, 'click', toggleView);
 
-        // TODO populate and implement filter
         await question_overview.render(view.DOM.questions_container);
         // await renderQuestionCards();
 
