@@ -16,6 +16,7 @@
         </div>
         <hr class="mt-0">
     </header>
+    <!--f:template name="components/menu.mobile"></f:template-->
     <main>
         <p>Bacon ipsum dolor amet ham hock landjaeger drumstick tenderloin prosciutto pork loin ground round bacon spare
             ribs biltong chicken cow rump strip steak short loin. Prosciutto t-bone frankfurter doner rump, hamburger
