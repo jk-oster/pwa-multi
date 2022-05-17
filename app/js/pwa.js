@@ -1,13 +1,11 @@
 "use strict";
 import KWMJS from "./kwm.js";
 
-console.log('hello world pwa loaded');
+console.log('hello world multi app loaded');
 
 new KWMJS();
 
-console.log(window.kwm);
-
-const answer = await Notification.requestPermission();
+// const answer = await Notification.requestPermission();
 
 /*
 
