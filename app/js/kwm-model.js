@@ -11,7 +11,7 @@ export default class KWM_Model {
         this.user;          // id, nicename, first_name, last_name, display_name, description, group, image, lang
         this.group;         // id, course, country, adminId, school
         this.chat;          // id, chatstart, partners[objects], questions[ids], tasks[ids]
-                                        // partners is an array of -> ID, display_name, nickname, description, ...
+        // partners is an array of -> ID, display_name, nickname, description, ...
         this.questions = new Map();     // id, answers[], question
                                         // answers[] -> id, date, answer, userId, user
         this.tasks = new Map();         // id, taskAnswers[], title, description, type, order, icon
@@ -20,43 +20,39 @@ export default class KWM_Model {
         this.currQuestion;  // id of current question
     }
 
-    setUser(user){
-        localStorage.setItem('user', JSON.stringify(user));
-    }
-
-    set user(user){
+    set user(user) {
         localStorage.setItem('user', JSON.stringify(user));
     }
 
     get user() {
-        if(!localStorage.getItem('user')) return undefined;
+        if (!localStorage.getItem('user')) return undefined;
         else return JSON.parse(localStorage.getItem('user'));
     }
 
-    set group(group){
+    set group(group) {
         localStorage.setItem('group', JSON.stringify(group));
     }
 
     get group() {
-        if(!localStorage.getItem('group')) return undefined;
+        if (!localStorage.getItem('group')) return undefined;
         else return JSON.parse(localStorage.getItem('group'));
     }
 
-    set chat(chat){
+    set chat(chat) {
         localStorage.setItem('chat', JSON.stringify(chat));
     }
 
     get chat() {
-        if(!localStorage.getItem('chat')) return undefined;
+        if (!localStorage.getItem('chat')) return undefined;
         else return JSON.parse(localStorage.getItem('chat'));
     }
 
-    get currQuestion(){
-        if(!localStorage.getItem('currQuestion')) return undefined;
+    get currQuestion() {
+        if (!localStorage.getItem('currQuestion')) return undefined;
         else return JSON.parse(localStorage.getItem('currQuestion'));
     }
 
-    set currQuestion(questionId){
+    set currQuestion(questionId) {
         localStorage.setItem('currQuestion', JSON.stringify(questionId));
     }
 
@@ -99,7 +95,7 @@ export default class KWM_Model {
         user.description = description;
 
         // Update ACF image field with separate request because updating User ACF fields does not work with /wp/v2
-        if(imgId){
+        if (imgId) {
             let acfData = {
                 fields: {
                     user_image: imgId,
@@ -117,7 +113,7 @@ export default class KWM_Model {
             kwm.utils.jsonBodyHeader(kwm.utils.authHeader()), wpBody);
     }
 
-    setLanguage(lang = 'en'){
+    setLanguage(lang = 'en') {
         console.log(lang)
         let user = this.user;
         user.lang = lang;
@@ -141,35 +137,31 @@ export default class KWM_Model {
 
     async getGroup() {
         if (!this.group) {
-            const resp = await kwm.utils.apiGET('/wp/v2/group/' + this.user.group);
+            const resp = await kwm.utils.apiGET('/jkoster/v1/usergroup');
             this.group = {
                 id: resp.id,
-                course: resp.acf.course[0],
-                country: resp.acf.country,
-                adminId: resp.acf.admin[0],
-                school: resp.acf.school,
+                course: resp.course,
+                country: resp.country,
+                adminId: resp.admin,
+                school: resp.school,
             }
-            this.user.lang = resp.acf.country.toLowerCase();
+            this.user.lang = resp.country.toLowerCase();
         }
         return this.group;
     }
 
     async getChat() {
+        console.log('I have been called');
         if (!this.chat) {
-            const resp = await kwm.utils.apiGET('/wp/v2/chat?users=' + this.user.id);
-            let userChat = {Chat: 'Has no user chat'};
+            const resp = await kwm.utils.apiGET('/jkoster/v1/userchat');
+            console.log(resp);
             if (!kwm.utils.isEmpty(resp)) {
-                userChat = resp.find((chat) => { // return true to remove item from collection
-                    return chat.acf.users.some((user) => user.ID === Number(this.user.id));
-                });
-                if (!kwm.utils.isEmpty(userChat)) {
-                    this.chat = {
-                        id: userChat.id,
-                        chatstart: userChat.acf.startdate,
-                        partners: userChat.acf.users, // .filter(user => user.ID !== Number(this.user.id)),
-                        questions: userChat.acf.questions,
-                        tasks: userChat.acf.tasks,
-                    }
+                this.chat = {
+                    id: resp.id,
+                    chatstart: resp.startdate,
+                    partners: resp.users, //.filter(user => user.id !== Number(this.user.id)),
+                    questions: resp.questions ? resp.questions : [],
+                    tasks: resp.tasks ? resp.tasks : [],
                 }
             }
         }
@@ -233,8 +225,10 @@ export default class KWM_Model {
         } else if (!this.questions.get(questionId)) {
             // TODO Error handling
         } else {
-            for(const partner of this.chat.partners){
-                const answers = await kwm.utils.apiGET(`/wp/v2/answer?question=${questionId}&user=${partner.ID}&orderby=date`);
+            for (const partner of this.chat.partners) {
+                console.log(partner);
+                const answers = await kwm.utils.apiGET(`/wp/v2/answer?question=${questionId}&user=${partner.id}&orderby=date`);
+
                 // Filter Answers that actually match question ID because WP meta query matches with "like" not "equals"
                 answers.filter((answer) => { // return true to remove item from collection
                     return Number(answer.acf.question[0]) === questionId;
@@ -248,7 +242,7 @@ export default class KWM_Model {
                     });
                 });
             }
-            this.questions.get(questionId).answers = this.questions.get(questionId).answers.sort((a,b)=>{
+            this.questions.get(questionId).answers = this.questions.get(questionId).answers.sort((a, b) => {
                 // Turn your strings into dates, and then subtract them
                 // to get a value that is either negative, positive, or zero.
                 return new Date(a.date) - new Date(b.date);
@@ -275,13 +269,27 @@ export default class KWM_Model {
             date: resp.date,
             answer: resp.acf.text,
             userId: resp.acf.user,
-            user: this.chat.partners.find(p => p.ID == resp.acf.user).nickname,
+            user: this.chat.partners.find(p => p.id == resp.acf.user).nickname,
         });
         return this.questions.get(questionId).answers[length - 1];
     }
 
     async addTaskAnswer(text, image = false, audio = false, video = false) {
-        
+
+    }
+
+    async getNewQuestion() {
+        try {
+            const newQuestion = await kwm.utils.apiGET('/jkoster/v1/newquestion');
+            if (!newQuestion) return;
+            let chat = this.chat;
+            chat.questions.push(newQuestion.id);
+            localStorage.setItem('chat', JSON.stringify(chat));
+            return newQuestion;
+        } catch (e) {
+            console.warn(e.message);
+        }
+        return;
     }
 
     /**
@@ -289,7 +297,7 @@ export default class KWM_Model {
      * @param fileInputElement file input element
      * @returns {Promise<*>}
      */
-    async mediaUpload(fileInputElement){
+    async mediaUpload(fileInputElement) {
         const formData = new FormData();
         formData.append("file", fileInputElement.files[0]);
         return await kwm.utils.apiPOST('/wp/v2/media', kwm.utils.authHeader(), formData);
