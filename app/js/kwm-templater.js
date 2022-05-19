@@ -62,7 +62,7 @@ export default class KWM_Templater {
         if (this.templateCache.get(templateName) && JSON.stringify(values) === JSON.stringify(this.valueCache.get(templateName))) {
             return this.templateCache.get(templateName);
         } else {
-            const templateString = await fetch(this.templatePath + templateName + ".tpl?v=0.2").then(response => response.text());
+            const templateString = await fetch(this.templatePath + templateName + ".tpl").then(response => response.text());
             if (!templateString || typeof templateString !== 'string') throw new Error(`template '${templateName}' invalid: ${templateString}`);
             const result = await this.translateTemplateValues(templateString, values, comments);
             this.templateCache.set(templateName, result);
