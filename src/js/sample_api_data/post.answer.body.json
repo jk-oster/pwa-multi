@@ -1,9 +1,0 @@
-{
-  "title": "New Answer by REST API post",
-  "status": "publish",
-  "fields": {
-    "question": [ 89 ],
-    "user": 4,
-    "text": "Hi I am a text answer posted by REST API"
-  }
-}

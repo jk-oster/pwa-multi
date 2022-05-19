@@ -2,16 +2,15 @@
 import KWM_Route from '../js/kwm-route.js?v=0.2';
 
 /*******************************************************************************
- *     404 Page
+ *     Home Page
  *
  *     KWM - 2022-03-30
  *******************************************************************************/
 
-export let view = new KWM_Route("/404", async function(){
+export let view = new KWM_Route("/home", async function(){
     await this.rendering();
 });
 
 view.rendering = async function(){
-    await kwm.render("404", kwm.config.appContainer);
+    await window.kwm.render("home", document.getElementById("kwmJS"));
 };
-
