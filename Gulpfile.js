@@ -42,6 +42,14 @@ function scss() {
 
 exports.scss = scss;
 
+function css() {
+    return gulp.src('./src/scss/*.css')
+        .pipe(cleanCSS())
+        .pipe(gulp.dest(distDir+'/css'));
+}
+
+exports.css = css;
+
 function js() {
     return gulp.src(['src/js/*.js'])
         .pipe(stripComments())
@@ -123,7 +131,7 @@ const watchCopy = function () {
 }
 
 // gulp.series(css)
-const gulpBuild = gulp.parallel(html, scss, js, views, comp, serv, copyJson, copyIcons, copyComponents, copyTemplates);
+const gulpBuild = gulp.parallel(html, scss, css, js, views, comp, serv, copyJson, copyIcons, copyComponents, copyTemplates);
 exports.build = gulpBuild;
 
 exports.default = function () {
@@ -131,5 +139,6 @@ exports.default = function () {
     watchJs();
     watchCopy();
     gulp.watch('src/*.scss', scss);
+    gulp.watch('src/*.css', css);
     gulp.watch('src/*.html', html);
 }
