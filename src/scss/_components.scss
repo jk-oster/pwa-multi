@@ -1,0 +1,84 @@
+/*
+https://codepen.io/villa7/pen/yOMZoB
+*/
+
+.msg-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin: 0 0 10px 0;
+  padding: 0;
+
+}
+.msg-box {
+  display: flex;
+  /*
+  background: $gray-700;
+  */
+  padding: 10px 10px 0 10px;
+  @include border-radius(6px);
+  max-width: 80%;
+  width: auto;
+  float: left;
+  /*
+  box-shadow: 0 0 2px $gray-900,0 2px 4px $gray-900;
+  */
+  @include glass();
+}
+.user-img {
+  display: inline-block;
+  @include border-radius(50%);
+  height: 40px;
+  width: 40px;
+  background: $indigo;
+  margin: 0 10px 10px 0;
+}
+.flr {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 50px);
+}
+.messages {
+  flex: 1 0 auto;
+}
+.msg {
+  display: inline-block;
+  font-size: 11pt;
+  line-height: 13pt;
+  color: $gray-300;
+  margin: 0 0 4px 0;
+}
+.msg:first-of-type {
+  margin-top: 8px;
+}
+.timestamp {
+  color: $gray-900;
+  font-size: 8pt;
+  margin-bottom: 10px;
+}
+.username {
+  margin-right: 3px;
+}
+.posttime {
+  margin-left: 3px;
+}
+
+.msg-self .msg-box {
+  @include border-radius(6px);
+  float: right;
+}
+.msg-self .user-img {
+  margin: 0 0 10px 10px;
+}
+.msg-self .msg {
+  text-align: left;
+  display: block;
+}
+.msg-self .timestamp {
+  text-align: right;
+}
+
+.avatar {
+  @include border-radius(50%);
+}
