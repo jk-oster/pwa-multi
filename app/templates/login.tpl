@@ -24,11 +24,11 @@
                         <form id="frm_login">
                             <div class="mb-3">
                                 <label for="username" class="form-label">%{username}</label>
-                                <input type="text" id="username" class="form-control" placeholder="username">
+                                <input type="text" id="username" class="form-control" placeholder="username" autocomplete="username">
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">%{password}</label>
-                                <input type="password" class="form-control" id="password" placeholder="*********">
+                                <input type="password" class="form-control" id="password" placeholder="*********" autocomplete="current-password">
                             </div>
                             <div id="msg_error" class="alert alert-danger visually-hidden" role="alert"></div>
                             <button id="btn_login" class="btn btn-primary">%{login}</button>

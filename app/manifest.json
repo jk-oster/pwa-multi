@@ -1,10 +1,10 @@
 {
-  "name": "My Little PWA",
-  "short_name": "MyPWA",
+  "name": "Multicultural App",
+  "short_name": "Multi App",
   "theme_color": "#fff",
   "background_color": "#fff",
   "display": "standalone",
-  "orientation": "",
+  "orientation": "any",
   "scope": "/",
   "start_url": "/index.html",
   "icons": [

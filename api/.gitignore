@@ -21,13 +21,10 @@
 wp-config.php
 
 # Example themes
-/wp-content/themes/twenty*
+/wp-content/themes/twenty*/
 
 # Example plugin
-/wp-content/plugins/acf-repeater
 /wp-content/plugins/hello.php
-/wp-content/plugins/akismet
-
 
 # Uploads
 /wp-content/uploads/
@@ -38,13 +35,12 @@ wp-config.php
 # htaccess
 /.htaccess
 
-
-
 # All plugins
 #
 # Note: If you wish to whitelist plugins,
 # uncomment the next line
-#/wp-content/plugins
+!/wp-content/plugins/custom-functions-jkoster/
+/wp-content/plugins/acf-repeater/
 
 # All themes
 #

@@ -3,21 +3,33 @@ import KWM_Utils from './kwm-utils.js?v=0.2';
 import KWM_Translator from './kwm-translator.js?v=0.2';
 import KWM_Templater from './kwm-templater.js?v=0.2';
 import KWM_Router from "./kwm-router.js?v=0.2";
+import KWM_Model from "./kwm-model.js?v=0.2";
+import KWM_Observable from "./kwm-observable.js?v=0.2";
+import KWM_Computed from "./kwm-computed.js?v=0.2";
+import KWM_Bindings from "./kwm-bindings.js?v=0.2";
 /**********************************************************************
- *     Class-Bundle for KWM-Applications.
- *     App-Shell needs an ID "#kwmJS".
+ *     Class-Bundle for KWM-Applications - it provides:
+ *     - Expressive and intelligent templating engine: allowing if|else|for|while|switch statements,
+ *     flexible asynchronous template fetching and insertion of partials, smart caching of static templates
+ *     - Flexible 2-way-data-binding with observables and computed values
+ *     - Simple hash-based routing
+ *     - Simple configuration
+ *     - Simple translation engine with the possibility to switch language by URL parameter
+ *     - Collection of handy utility functions for API calls, DOM operations and many more things
+ *     - Handy and customizable shorthand convenience functions
  *
- *     @param:
- *     appContainer - This is where the App is rendered into
- *     debugMode - Enables console.log
- *     webRoot - Give me the root-URL of your App
- *     apiRoot - Give me the root-URL of your API
+ *     @param appContainer - This is where the App is rendered into
+ *     @param debugMode - Enables / Disables console.log output
+ *     @param webRoot - Give me the root-URL of your App (detected automatically)
+ *     @param apiRoot - Give me the root-URL of your API
+ *     @param serviceworkerPath - Give me the relative path to your serviceworker
+ *     @param templatesPath - Give me the relative path to your templates folder
+ *     @param languages - Give me an array of the languages supported by the translator
  *
- *     Jakob Osterberger - 2022-03-28
+ *     @author Jakob Osterberger - 2022-04-05
  **********************************************************************/
-
 export default class KWMJS{
-    constructor(){
+    constructor(config){
         // Make it a singleton
         if (KWMJS._instance) {
             return KWMJS._instance
@@ -27,46 +39,71 @@ export default class KWMJS{
         // Add KWMJS as global object to window
         window.kwm = this;
 
-        // Options config
-        this.conf = {
+        // Configuration
+        if(!config) this.conf = {
             appContainer: document.getElementById('kwmJS'),
             debugMode: true,
-            webRoot: 'https://app.s2010456022.student.kwmhgb.at', // window.location.origin + window.location.pathname.replace('/index.html',''),
-            apiRoot: 'https://api.s2010456022.student.kwmhgb.at/jk-json',
+            webRoot: window.location.origin + window.location.pathname.replace('/index.html',''),
+            apiRoot: 'https://api.s2010456022.student.kwmhgb.at/wp-json',
             serviceworkerPath: './serviceworker.js',
             templatesPath: '/templates/',
             languages: ["en", "de"],
         };
-
-        this.cache = {};
+        else this.conf = config;
 
         this.utils = KWM_Utils;
         this.utils.setConsoleMode(this.conf.debugMode);
         this.registerServiceWorker().then(() => {});
+        this.model = new KWM_Model();
         this.translator = new KWM_Translator(this.conf.languages);
         this.templater = new KWM_Templater(this.conf.webRoot+ this.conf.templatesPath);
         this.router = new KWM_Router();
+        console.info('KWMJS is ready', KWMJS._instance);
     }
 
     async registerServiceWorker(){
+        if(!this.conf.serviceworkerPath) {
+            console.info('Is your application a PWA? - no serviceworker path specified');
+            return;
+        }
         // Check if serviceworker is supported
         if ('serviceWorker' in navigator) {
             try {
                 // register Serviceworker
                 await navigator.serviceWorker.register(this.conf.serviceworkerPath);
-                console.log("serviceWorker registered");
+                console.info("ServiceWorker registered");
             } catch (error) {
-                console.log("serviceWorker registration failed", error);
+                console.error("ServiceWorker registration failed", error);
             }
-        } else console.log('serviceWorker is not supported');
+        } else console.warn('ServiceWorker is not supported');
     }
 
-    // Convenience Methods for easy calling
+    /*
+     * Convenience Methods
+     */
+
+    // Create observable
+    obs(value=""){
+        return new KWM_Observable(value);
+    }
+
+    // Create computed - computes value
+    compute(valueFn, depObserverArr = []){
+        return new KWM_Computed(valueFn, depObserverArr);
+    }
+
+    // Create and init bindings - call after render function!
+    bindings(observablesObject){
+        return new KWM_Bindings(observablesObject);
+    }
+
+    // Translate
     t(key){
         return this.translator.translate(key);
     }
 
-    async render(templateName, container = this.conf.appContainer, values = false, mode="overwrite"){
-        await this.templater.renderTemplate(templateName, container, values, mode);
+    // Render Template
+    async render(templateName, container = this.conf.appContainer, values = null, mode="overwrite", comments=true){
+        await this.templater.renderTemplate(templateName, container, values, mode, comments);
     }
 }

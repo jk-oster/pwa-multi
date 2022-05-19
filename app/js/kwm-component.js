@@ -1,16 +1,16 @@
 "use strict";
 /*******************************************************
- *
+ *     Basic Class for view components
  *
  *     KWM - 2022-03-30
  *******************************************************/
 export default class KWM_Component {
-    constructor({template, renderFn}) {
-        this.template = template;
-        this.renderFn = renderFn;
+    constructor(templateName, init) {
+        this.template = templateName;
+        this.init = init;
     }
 
-    render(container, data, mode){
-        this.renderFn(container, data, mode);
+    render(container, data, mode='overwrite', comments=false){
+        this.init(container, data, mode, comments);
     }
 }
