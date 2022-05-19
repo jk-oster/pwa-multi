@@ -81,16 +81,6 @@ module.exports = function (grunt) {
                 }],
             },
         },
-        uncss: {
-            dist: {
-                options: {
-                    ignore: ['#added_at_runtime', '.created_by_jQuery']
-                },
-                files: {
-                    'app/css/tidy.css': ['app/index.html'],
-                },
-            },
-        },
         imagemin: {
             dynamic: {
                 files: [{
@@ -136,7 +126,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-terser');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-imagemin');
-    grunt.loadNpmTasks('grunt-uncss');
     grunt.loadNpmTasks('grunt-autoprefixer');
     grunt.registerTask('default', ['sass', 'autoprefixer', 'cssmin', 'copy', 'terser']);
 };
