@@ -27,7 +27,10 @@ view.rendering = async function () {
     console.log(answers);
 
     for(const answer of answers) {
-        await kwm.render('components/answer', view.DOM.container, answer, 'append');
+        let data = answer;
+        data.userImg = kwm.model.chat.partners.find(p => p.id === answer.userId).image?.sizes?.thumbnail || 'https://placekitten.com/150/150';
+        data.isSelf = kwm.model.user.id === answer.userId;
+        await kwm.render('components/answer', view.DOM.container, data, 'append');
     }
     
     kwm.utils.setSingleEventListener(view.DOM.btn_send, 'click', sendAnswerHandler);
@@ -36,8 +39,19 @@ view.rendering = async function () {
 }
 
 async function sendAnswerHandler() {
-    const text = view.DOM.text.innerText;
+    let text = view.DOM.text.innerHTML;
+    // Remove script and style tags
+    text = text.replace(/(?:<style.+?>.+?<\/style>|<script.+?>.+?<\/script>)/gi, '');
+    // Replace div with p
+    console.log(text);
+    for (const match of text.matchAll(/<div.*?>(.*?)<\/div>/gi)) {
+        console.log(match);
+        text = text.replace(match[0], `<p class="msg">${match[1]}</p>`);
+    }
+    console.log(text);
     let answer = await kwm.model.addAnswer(kwm.model.currQuestion.id, text);
+    answer.userImg = kwm.model.chat.partners.find(p => p.id === answer.userId).image?.sizes?.thumbnail || 'https://placekitten.com/150/150';
+    answer.isSelf = kwm.model.user.id;
     await kwm.render('components/answer', view.DOM.container, answer, 'append');
     view.DOM.text.innerText = '';
     kwm.utils.scrollToBottom();
