@@ -28,8 +28,8 @@ view.rendering = async function(){
         const templateData = {
             nickname: kwm.model.user.nickname,
             description: kwm.model.user.description,
-            partnername: kwm.model.chat.partners.find(p => p.ID !== kwm.model.user.id).nickname,
-            partnerdescription: kwm.model.chat.partners.find(p => p.ID !== kwm.model.user.id).user_description,
+            partnername: kwm.model.chat.partners.find(p => p.id !== kwm.model.user.id).nickname,
+            partnerdescription: kwm.model.chat.partners.find(p => p.id !== kwm.model.user.id).user_description,
         };
         setTimeout(async () => {
             await kwm.render("components/match-details", view.DOM.container, templateData);

@@ -169,14 +169,12 @@ export default class KWM_Utils {
     static async request(url, config = {}) {
         return fetch(url, config)
             .then((response) => {
-                if (!response.ok) {
-                    console.error(response.statusText + ' at ' + url);
-                    console.error(config);
-                    console.error(response);
+                if(response.status !== 200){
+                    console.warn(response);
                 }
                 return response.json();
             })
-            .then((data) => data);
+            .then(data => data);
     }
 
     /**
@@ -270,7 +268,7 @@ export default class KWM_Utils {
      * @param elem
      */
     static showErrorMessage(message, elem = undefined) {
-        console.log(message);
+        console.error(message);
         if (elem) {
             elem.classList.remove('visually-hidden');
             elem.innerHTML = message;

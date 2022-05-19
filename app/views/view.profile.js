@@ -2,7 +2,7 @@
 import KWM_Route from '../js/kwm-route.js?v=0.2';
 
 /*******************************************************************************
- *     404 Page
+ *     Profile Page
  *
  *     KWM - 2022-03-30
  *******************************************************************************/
@@ -33,21 +33,18 @@ view.rendering = async function(){
                 try {
                     const media = document.querySelector('#avatar');
                     const resp = await kwm.model.mediaUpload(media);
-                    console.log(media);
                     imgId = resp.id;
                     imgUrl = resp.media_details.sizes.medium.source_url;
-                    console.log(resp);
                     document.querySelector('#img_avatar').src = imgUrl;
                 } catch (e) {
-                    console.log(e);
+                    console.error(e);
                 }
             }
-            const newUserData = await kwm.model.updateUser(view.DOM.input_name.value, view.DOM.input_description.value, imgId);
-            console.log(newUserData);
+            kwm.model.updateUser(view.DOM.input_name.value, view.DOM.input_description.value, imgId);
             kwm.router.changeView('/app');
         }
         catch (e) {
-            console.log(e);
+            console.error(e);
         }
     });
 

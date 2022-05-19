@@ -13,7 +13,6 @@ export let view = new KWM_Route("/question", async function () {
 
 view.rendering = async function () {
     const questionData = kwm.model.currQuestion;
-    console.log(questionData);
     await kwm.render("question-detail", kwm.conf.appContainer, questionData);
 
     view.DOM = {
