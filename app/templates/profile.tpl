@@ -19,7 +19,7 @@
     </header>
     <main>
         <div class="row justify-content-center">
-            <img id="img_avatar" src="&{image}" alt="Profile picture" style="max-height: 30%; max-width: 30%;">
+            <img id="img_avatar" src="&{image}" class="avatar" alt="Profile picture of &{username}" style="max-height: 30%; max-width: 30%;">
         </div>
         <form>
             <div class="row">
