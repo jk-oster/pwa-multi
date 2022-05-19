@@ -1,5 +1,5 @@
 "use strict";
-import KWMJS from "./kwm.js";
+import KWMJS from "./js/kwm.js";
 
 console.log('hello world multi app loaded');
 

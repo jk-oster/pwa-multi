@@ -12,5 +12,6 @@ export let view = new KWM_Route("/404", async function(){
 });
 
 view.rendering = async function(){
-    await kwm.render("404", document.getElementById("kwmJS"));
+    await kwm.render("404", kwm.config.appContainer);
 };
+
