@@ -2,7 +2,6 @@ const gulp = require('gulp');
 const concat = require('gulp-concat');
 const cleanCSS = require('gulp-clean-css');
 const uglify = require('gulp-uglify');
-// const imagemin = require('gulp-imagemin');
 const minifyHTML = require('gulp-htmlmin');
 const stripComments = require('gulp-strip-comments');
 const jsHint = require('gulp-jshint');
